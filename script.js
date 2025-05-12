@@ -65,20 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle Print button
-    const printBtn = document.getElementById('print-btn');
-    if (printBtn) {
-        printBtn.addEventListener('click', function() {
-            // First expand all sections for printing
-            allDeepDetails.forEach(el => {
-                el.style.display = 'block';
-            });
-
-            // Then print
-            window.print();
-        });
-    }
-
     // Create a new idea input form
     const main = document.querySelector('main');
     const ideaSection = document.createElement('section');
