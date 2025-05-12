@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <ul id="ideas-list"></ul>
             </div>
         </div>
-    ";
+    `;
 
     main.appendChild(ideaSection);
 

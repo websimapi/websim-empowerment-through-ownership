@@ -36,9 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-/**
- * Toggle visibility of a section
- */
+// Toggle visibility of a section
 function toggleSectionVisibility(sectionId, isVisible) {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -46,9 +44,7 @@ function toggleSectionVisibility(sectionId, isVisible) {
     }
 }
 
-/**
- * Update the print layout based on selected mode
- */
+// Update the print layout based on selected mode
 function updatePrintLayout(mode) {
     const printContent = document.getElementById('print-content');
     
@@ -56,20 +52,16 @@ function updatePrintLayout(mode) {
     printContent.classList.remove('regular-mode', 'duplex-mode', 'pamphlet-mode');
     
     // Add the appropriate class
-    printContent.classList.add(`${mode}-mode`);
+    printContent.classList.add(mode + '-mode');
     
     // Special handling for pamphlet mode
     if (mode === 'pamphlet') {
         // Make sure sections are ordered correctly for pamphlet printing
-        // This may involve reordering sections for proper booklet layout
         reorderForPamphlet();
     }
 }
 
-/**
- * Reorder sections for pamphlet printing
- * This arranges pages in the correct order for folded booklet printing
- */
+// Reorder sections for pamphlet printing
 function reorderForPamphlet() {
     const printContent = document.getElementById('print-content');
     const sections = Array.from(printContent.querySelectorAll('.print-section:not([style*="display: none"])'));
@@ -105,32 +97,28 @@ function reorderForPamphlet() {
     pamphletOrder.forEach(index => printContent.appendChild(sections[index]));
 }
 
-/**
- * Update page numbers for all visible sections
- */
+// Update page numbers for all visible sections
 function updatePageNumbers() {
     const visibleSections = document.querySelectorAll('.print-section:not([style*="display: none"])');
     visibleSections.forEach((section, index) => {
         const pageNumber = section.querySelector('.print-page-number');
         if (pageNumber) {
-            pageNumber.textContent = `Page ${index + 1} of ${visibleSections.length}`;
+            pageNumber.textContent = 'Page ' + (index + 1) + ' of ' + visibleSections.length;
         }
     });
 }
 
-/**
- * Prepare the page for printing
- */
+// Prepare the page for printing
 function preparePrint(mode) {
     // First update layout if needed
     if (mode) {
-        document.querySelector(`input[name="print-mode"][value="${mode}"]`).checked = true;
+        document.querySelector('input[name="print-mode"][value="' + mode + '"]').checked = true;
         updatePrintLayout(mode);
         updatePageNumbers();
     }
     
     // Small delay to ensure styles are applied
-    setTimeout(() => {
+    setTimeout(function() {
         window.print();
     }, 300);
 }
